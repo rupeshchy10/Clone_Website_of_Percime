@@ -9,7 +9,7 @@ import Button from "./Button";
 const Navbar = ({ theme, setTheme }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [showNav, setShowNav] = useState(true);
-	const scrollRef = useRef(null);
+	const [isScrolled, setIsScrolled] = useState(false);
 
 	const navLists = [
 		{ id: 1, menu: "Services", href: "#services" },
@@ -17,35 +17,43 @@ const Navbar = ({ theme, setTheme }) => {
 		{ id: 3, menu: "Contact", href: "#contact" },
 	];
 
-	const lastScrollX = useRef(0);
+	const lastScrollY = useRef(0);
 
-	//Scroll Logic
 	useEffect(() => {
 		const handleScroll = () => {
-			const currentScrollX = scrollRef.current.scrollTop;
+			const currentScrollY = window.scrollY;
 
-			if (currentScrollX > lastScrollX.current && currentScrollX > 80) {
-				setShowNav(false); // sliding right -> hide
+			// Scroll logic
+			if (currentScrollY > lastScrollY.current) {
+				setShowNav(false); // scrolling down -> hide
 			} else {
-				setShowNav(true); // sliding left -> show
+				setShowNav(true); // scrolling up -> show
 			}
 
-			lastScrollX.current = currentScrollX;
+			// shadow logic
+			setIsScrolled(currentScrollY > 0);
+
+			lastScrollY.current = currentScrollY;
 		};
 
-		const container = scrollRef.current;
-		if (!container) return;
-		container.addEventListener("scroll", handleScroll);
+		window.addEventListener("scroll", handleScroll);
 
-		return () => container.removeEventListener("scroll", handleScroll);
-	}, [scrollRef]);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	return (
 		<div className="px-[21px] md:px-8">
 			<div
-				className={`fixed top-0 pt-6 md:pt-14 md:pb-2 lg:pt-18 lg:pb-2 left-0 w-full z-50 bg-blue-100 dark:bg-[#0a0e27] dark:bg-red- shadow-[rgba(15,23,42,0.08)] hover:shadow-[rgba(15,23,42,0.15)] ${
-					showNav ? "translate-y-0" : "-translate-y-20"
-				}`}
+				className={`fixed top-0 pt-6 sm:pt-8 md:pt-14 lg:pt-18 left-0 w-full z-50 backdrop-blur-lg bg-blue-100/80 dark:bg-[#0a0e27]/90  transition-all duration-400 ease-in-out ${
+					showNav
+						? "translate-y-0 pb-3 sm:pb-2"
+						: "-translate-y-10 pt-10 sm:pt-11 pb-3 sm:pb-4 md:pb-4 lg:pb-8 shadow-[rgba(0,217,255,0.3)]"
+				} ${
+					isScrolled
+						? "shadow-lg shadow-black/10 dark:shadow-black/40"
+						: "shadow-none"
+				}
+`}
 			>
 				<div className="flex items-end justify-between max-w-[1400px] mx-auto px-8">
 					<a href="#home">
@@ -54,6 +62,7 @@ const Navbar = ({ theme, setTheme }) => {
 							className="h-8 md:h-12 ml-6 w-auto block"
 						/>
 					</a>
+
 					<nav className="flex gap-0 md:gap-4 items-center">
 						<ul className="hidden md:flex md:gap-8 gap-10 font-semibold text-[0.95rem] text-[#475569] dark:text-[#94a3b8] md:mr-4 lg:mr-10">
 							{navLists.map((list) => (
@@ -68,10 +77,11 @@ const Navbar = ({ theme, setTheme }) => {
 							setTheme={setTheme}
 							className="hidden md:block"
 						/>
+
 						<a href="#contact">
 							{/* Button's icon for md devices */}
 							<button
-								className="hidden md:block lg:hidden text-xl border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] rounded-[10px] p-3 bg-white dark:bg-[#141829] dark:text-white  hover:border-[rgba(15, 23, 42, 0.15)] w-11 h-11 cursor-pointer"
+								className="hidden md:block lg:hidden text-xl border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] rounded-[10px] p-3 bg-white dark:bg-[#141829] dark:text-white  hover:border-[rgba(15, 23, 42, 0.15)] w-11 h-11 cursor-pointer transition-all duration-300"
 								onClick={() => setIsOpen(false)}
 							>
 								<FaPhone />
@@ -81,10 +91,11 @@ const Navbar = ({ theme, setTheme }) => {
 								Talk to Us
 							</button>
 						</a>
+
 						<a href="#contact">
 							{/* Button for md devices */}
 							<button
-								className="hidden md:block lg:hidden text-xl border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] rounded-[10px] p-3 bg-white dark:bg-[#141829] dark:text-white  hover:border-[rgba(15, 23, 42, 0.15)] w-11 h-11 cursor-pointer"
+								className="hidden md:block lg:hidden text-xl border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] rounded-[10px] p-3 bg-white dark:bg-[#141829] dark:text-white  hover:border-[rgba(15, 23, 42, 0.15)] w-11 h-11 cursor-pointer transition-all duration-300"
 								onClick={() => setIsOpen(false)}
 							>
 								<MdStart />
@@ -108,21 +119,26 @@ const Navbar = ({ theme, setTheme }) => {
 								className="md:hidden text-xl"
 								onClick={() => setIsOpen(!isOpen)}
 							>
-								{<MobileToggleButton />}
+								{
+									<MobileToggleButton
+										isOpen={isOpen}
+										setIsOpen={setIsOpen}
+									/>
+								}
 							</button>
 						</div>
-
 						{/* Mobile Nav Sidepanel for devices below md */}
+
 						<ul
-							className={`fixed top-0 right-0 md:hidden flex flex-col w-[280px] h-screen font-semibold text-[0.95rem] text-[#475569] dark:text-[#94a3b8] pt-24 px-8 pb-8 gap-6 z-50 bg-[#f8fafc] dark:bg-[#0a0e27] shadow-[-8px_0_32px_rgba(0,0,0,0.5)] transform transition-transform duration-400 ease-in-out ${
-								isOpen ? "translate-x-0" : "translate-x-full"
+							className={`fixed top-0 right-0 md:hidden flex flex-col w-[280px] font-semibold text-[0.95rem] text-[#475569] dark:text-[#94a3b8] pt-24 px-8 pb-8 gap-6 z-50 bg-[#f8fafc] dark:bg-[#0a0e27] transform transition-all duration-400 ease-in-out ${
+								isOpen ? "translate-x-0 shadow-[-8px_0_32px_rgba(0,0,0,0.5)]" : "translate-x-full"
 							}`}
 						>
 							{navLists.map((list) => (
 								<li key={list.id}>
 									<a
 										href={list.href}
-                                        onClick={()=>setIsOpen(false)}
+										onClick={() => setIsOpen(false)}
 										className="hover:text-yellow-500 dark:hover:text-[#60a5fa] cursor-pointer mt-14"
 									>
 										{list.menu}
@@ -137,18 +153,16 @@ const Navbar = ({ theme, setTheme }) => {
 								/>
 								<a
 									href="#contact"
-                                    	onClick={() => setIsOpen(false)}
-
-									className="md:hidden inline-flex justify-center items-center border-[1.5px] border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] rounded-[10px] px-16 py-3 font-semibold text-[0.95rem] text-[#475569] dark:text-[#94a3b8] hover:border-[rgba(15,23,42,0.15)]"
+									onClick={() => setIsOpen(false)}
+									className="md:hidden inline-flex justify-center items-center border-[1.5px] border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] rounded-[10px] px-16 py-3 font-semibold text-[0.95rem] text-[#475569] dark:text-[#94a3b8] hover:border-[rgba(15,23,42,0.15)] transition-all duration-300"
 								>
 									Talk to Us
 								</a>
 								<Button
 									text="Get Started"
 									href="#contact"
-									className="px-12"
-                                    	onClick={() => setIsOpen(false)}
-
+									className="px-12 mb-60"
+									onClick={() => setIsOpen(false)}
 								/>
 							</div>
 						</ul>

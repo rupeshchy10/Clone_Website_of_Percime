@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-const MobileToggleButton = () => {
-	const [isOpen, setIsOpen] = useState(false);
+const MobileToggleButton = ({isOpen, setIsOpen}) => {
 
 	return (
 		<>

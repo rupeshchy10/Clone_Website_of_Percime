@@ -110,7 +110,7 @@ const Services = () => {
 									{service.features.map((feature, index) => (
 										<li
 											key={index}
-											className="whitespace-nowrap border dark:border-[rgba(255,255,255,0.06)] dark:hover:border-[rgba(255,255,255,0.12)] shadow-[0_0_0_0_rgba(0,217,255,0.3)] text-center rounded-md text-[#475569] dark:text-[#64748b] py-1.5 px-3.5 text-[0.8125rem] font-medium bg-[rgba(15,23,42,0.03)] dark:bg-[rgba(255,255,255,0.04)] border-[rgba(15,23,42,0.08)] hover:border-[rgba(15,23,42,0.15)]"
+											className="whitespace-nowrap border dark:border-[rgba(255,255,255,0.06)] dark:hover:border-[rgba(255,255,255,0.12)] shadow-[0_0_0_0_rgba(0,217,255,0.3)] text-center rounded-md text-[#475569] dark:text-[#64748b] py-1.5 px-3.5 text-[0.8125rem] font-medium bg-[rgba(15,23,42,0.03)] dark:bg-[rgba(255,255,255,0.04)] border-[rgba(15,23,42,0.08)] hover:border-[rgba(15,23,42,0.15)] transition-all duration-300"
 										>
 											{feature}
 										</li>

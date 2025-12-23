@@ -99,7 +99,7 @@ const Home = () => {
 							delay: 0.2,
 						}}
 						viewport={{ once: true }}
-						className="order-1 lg:order-2 border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] hover:border-[rgba(15,23,42,0.15)] dark:hover:border-[rgba(255,255,255,0.12)] rounded-3xl backdrop-blur-[20px] bg-white dark:bg-[#141829] p-8 -mt-10 md:mt-1 lg:mt-16 shadow-[0_24px_64px_rgba(0,0,0,0.08)] dark:shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
+						className="order-1 lg:order-2 border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] hover:border-[rgba(15,23,42,0.15)] dark:hover:border-[rgba(255,255,255,0.12)] rounded-3xl backdrop-blur-[20px] bg-white dark:bg-[#141829] p-8 -mt-3 sm:-mt-4 md:mt-1 lg:mt-16 shadow-[0_24px_64px_rgba(0,0,0,0.08)] dark:shadow-[0_24px_64px_rgba(0,0,0,0.4)]"
 					>
 						<div class="absolute top-0 left-0 w-full h-[1.5px] bg-[linear-gradient(90deg,transparent,#00d9ff,transparent)]" />
 						<div className="flex items-center text-sm font-semibold text-[#64748b] dark:text-[#94a3b8] justify-between mb-8">
