@@ -163,7 +163,7 @@ const Navbar = ({ theme, setTheme }) => {
 								<Button
 									text="Get Started"
 									href="#contact"
-									className="px-12 mb-60"
+									className="px-12 mb-120"
 									onClick={() => setIsOpen(false)}
 								/>
 							</div>
