@@ -26,7 +26,7 @@ const Contact = () => {
 						delay: 0.2,
 					}}
 					viewport={{ once: true }}
-					className="grid grid-cols-1 border rounded-4xl py-16 px-12 bg-white dark:bg-[#141829] mt-12 mb-24 max-w-5xl mx-auto space-y-10 dark:border-[rgba(255,255,255,0.06)] border-[rgba(15,23,42,0.08)]"
+					className="grid grid-cols-1 border rounded-4xl py-16 px-12 bg-white dark:bg-[#141829] mt-12 mb-24 max-w-5xl mx-auto space-y-10 dark:border-[rgba(255,255,255,0.06)] border-[rgba(15,23,42,0.08)] contact-card"
 				>
 					<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
 						{contacts.map((contact) => (

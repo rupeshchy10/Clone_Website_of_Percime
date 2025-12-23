@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const ThemeToggler = ({ theme, setTheme,className="" }) => {
+const ThemeToggler = ({ theme, setTheme, className = "" }) => {
 	useEffect(() => {
 		const prefersDarkMode = window.matchMedia(
 			"(prefers-color-scheme:dark)"

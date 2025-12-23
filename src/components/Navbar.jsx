@@ -44,13 +44,13 @@ const Navbar = ({ theme, setTheme }) => {
 	return (
 		<div className="px-[21px] md:px-8">
 			<div
-				className={`fixed top-0 pt-6 sm:pt-8 md:pt-14 lg:pt-18 left-0 w-full z-50 backdrop-blur-lg bg-blue-100/80 dark:bg-[#0a0e27]/90  transition-all duration-400 ease-in-out ${
+				className={`fixed top-0 pt-6 sm:pt-8 md:pt-14 lg:pt-18 left-0 w-full z-50 backdrop-blur-lg  transition-all duration-400 ease-in-out ${
 					showNav
 						? "translate-y-0 pb-3 sm:pb-2"
-						: "-translate-y-10 pt-10 sm:pt-11 pb-3 sm:pb-4 md:pb-4 lg:pb-8 shadow-[rgba(0,217,255,0.3)]"
+						: "-translate-y-10 pt-10 sm:pt-11 pb-3 sm:pb-4 md:pb-4 lg:pb-8"
 				} ${
 					isScrolled
-						? "shadow-lg shadow-black/10 dark:shadow-black/40"
+						? "shadow-lg shadow-black/10 dark:shadow-black/40 bg-[#ffffff]/80 dark:bg-[#0a0e27]/90"
 						: "shadow-none"
 				}
 `}
@@ -131,7 +131,9 @@ const Navbar = ({ theme, setTheme }) => {
 
 						<ul
 							className={`fixed top-0 right-0 md:hidden flex flex-col w-[280px] font-semibold text-[0.95rem] text-[#475569] dark:text-[#94a3b8] pt-24 px-8 pb-8 gap-6 z-50 bg-[#f8fafc] dark:bg-[#0a0e27] transform transition-all duration-400 ease-in-out ${
-								isOpen ? "translate-x-0 shadow-[-8px_0_32px_rgba(0,0,0,0.5)]" : "translate-x-full"
+								isOpen
+									? "translate-x-0 shadow-[-8px_0_32px_rgba(0,0,0,0.5)]"
+									: "translate-x-full"
 							}`}
 						>
 							{navLists.map((list) => (
