@@ -66,7 +66,10 @@ const Navbar = ({ theme, setTheme }) => {
 					<nav className="flex gap-0 md:gap-4 items-center">
 						<ul className="hidden md:flex md:gap-8 gap-10 font-semibold text-[0.95rem] text-[#475569] dark:text-[#94a3b8] md:mr-4 lg:mr-10">
 							{navLists.map((list) => (
-								<li key={list.id}>
+								<li
+									key={list.id}
+									className="relative hover:text-black dark:hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-linear-to-r after:from-[#00d9ff] after:to-[#6366f1] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
+								>
 									<a href={list.href}>{list.menu}</a>
 								</li>
 							))}
